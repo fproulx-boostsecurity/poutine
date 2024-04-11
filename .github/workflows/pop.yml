@@ -25,7 +25,7 @@ jobs:
       env:
         PINNED_VERSION: v0.9.3
         PINNED_ARCH: poutine_Linux_x86_64.tar.gz
-        PINNED_HASH: 5947ed656ed58ea45eeba6cd4c00b1ef973cd0840b1030ff6a75e7201f907bca
+        PINNED_HASH: 938c36de89eea18d69c8d5605a64ef1573e682cfd02b61d4cc2de3b0663a63bc
       run: |
         curl -sLO "https://github.com/boostsecurityio/poutine/releases/download/$PINNED_VERSION/$PINNED_ARCH"
         echo "$PINNED_HASH  $PINNED_ARCH" | shasum -a 256 --check
