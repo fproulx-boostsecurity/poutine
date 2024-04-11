@@ -1,0 +1,40 @@
+name: POP - poutine on poutine
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/**'
+      - 'action.yml'
+
+permissions:
+  security-events: write
+  contents: read
+
+jobs:
+  pop:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+      with:
+        path: itself
+
+    - name: Download and Setup Poutine a pinned version of poutine
+      env:
+        PINNED_VERSION: v0.9.3
+        PINNED_HASH: 5947ed656ed58ea45eeba6cd4c00b1ef973cd0840b1030ff6a75e7201f907bca
+      run: |
+        curl -sLO "https://github.com/boostsecurityio/poutine/releases/download/$PINNED_VERSION/poutine_Linux_arm64.tar.gz"
+        echo "$PINNED_HASH  poutine_Linux_arm64.tar.gz" | shasum -a 256 --check
+        tar -xvzf poutine_Linux_arm64.tar.gz
+
+    - name: Run Self-Test with Poutine on 'itself'
+      run: |
+        ./poutine -format sarif analyze_local itself > results.sarif
+
+    - name: Upload SARIF file
+      uses: github/codeql-action/upload-sarif@4355270be187e1b672a7a1c7c7bae5afdc1ab94a
+      with:
+        sarif_file: results.sarif
