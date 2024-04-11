@@ -4,7 +4,7 @@ description: |
   Designed to streamline security analysis, poutine scans your repository’s CI/CD pipelines.
   It offers insights to secure your software supply chain efficiently.
 inputs:
-  repository_path:
+  path:
     description: 'Path to the local repository to analyze.'
     required: true
     default: '.'
