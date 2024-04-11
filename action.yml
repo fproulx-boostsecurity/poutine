@@ -10,13 +10,13 @@ inputs:
     default: '.'
 runs:
   using: composite
-  env:
-    PINNED_VERSION: v0.9.3
-    PINNED_ARCH: poutine_Linux_x86_64.tar.gz
-    PINNED_HASH: 938c36de89eea18d69c8d5605a64ef1573e682cfd02b61d4cc2de3b0663a63bc
   steps:
     - name: Download and Setup
       shell: bash
+      env:
+        PINNED_VERSION: v0.9.3
+        PINNED_ARCH: poutine_Linux_x86_64.tar.gz
+        PINNED_HASH: 938c36de89eea18d69c8d5605a64ef1573e682cfd02b61d4cc2de3b0663a63bc
       run: |
         # Create a temp dir for the tool and its results
         POUTINE_TOOL_DIR=$(mktemp -d)
