@@ -36,7 +36,7 @@ runs:
       shell: bash
       run: |
         POUTINE_SARIF_FILE="${POUTINE_TOOL_DIR}/results.sarif"
-        echo "POUTINE_SARIF_FILE=${POUTINE_SARIF_FILE}" >> "${GITHUB_OUTPUT}"
+        echo "POUTINE_SARIF_FILE=${POUTINE_SARIF_FILE}" >> "${GITHUB_ENV}"
         "${POUTINE_TOOL_DIR}/poutine" -format sarif analyze_local "${TARGET_PATH}" > "${POUTINE_SARIF_FILE}"
       env:
         TARGET_PATH: ${{ inputs.path }}
